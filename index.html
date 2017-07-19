@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Trapkit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="panel key" data-key="81">
+            <kbd>Q</kbd>
+            <span>Clap</span>
+        </div>
+
+        <div class="panel key" data-key="87">
+            <kbd>W</kbd>
+            <span>Hihat</span>
+        </div>
+
+        <div class="panel key" data-key="69">
+            <kbd>E</kbd>
+            <span>Kick</span>
+        </div>
+
+        <div class="panel key" data-key="82">
+            <kbd>R</kbd>
+            <span>snare</span>
+        </div>
+
+        <div class="panel key" data-key="65">
+            <kbd>A</kbd>
+            <span>cymbal</span>
+        </div>
+
+        <div class="panel key" data-key="83">
+            <kbd>S</kbd>
+            <span>conga</span>
+        </div>
+
+        <div class="panel key" data-key="68">
+            <kbd>D</kbd>
+            <span>stick</span>
+        </div>
+
+        <div class="panel key" data-key="70">
+            <kbd>F</kbd>
+            <span>maracas</span>
+        </div>
+
+        <div class="panel key" data-key="90">
+            <kbd>Z</kbd>
+            <span>cowbell</span>
+        </div>
+
+        <div class="panel key" data-key="88">
+            <kbd>X</kbd>
+            <span>clave</span>
+        </div>
+
+        <div class="panel key" data-key="67">
+            <kbd>C</kbd>
+            <span>Crash</span>
+        </div>
+
+        <div class="panel key" data-key="86">
+            <kbd>V</kbd>
+            <span>808 Bass</span>
+        </div>
+
+    </div>
+
+    <audio data-key="81" src="sounds/clap.wav"></audio>
+    <audio data-key="87" src="sounds/hihat.wav"></audio>
+    <audio data-key="69" src="sounds/kick.wav"></audio>
+    <audio data-key="82" src="sounds/snare.wav"></audio>
+    <audio data-key="65" src="sounds/cymball.wav"></audio>
+    <audio data-key="83" src="sounds/conga.wav"></audio>
+    <audio data-key="68" src="sounds/stick.wav"></audio>
+    <audio data-key="70" src="sounds/maracas.wav"></audio>
+    <audio data-key="90" src="sounds/cowbell.wav"></audio>
+    <audio data-key="88" src="sounds/clave.wav"></audio>
+    <audio data-key="67" src="sounds/crash.wav"></audio>
+    <audio data-key="86" src="sounds/warm-808.wav"></audio>
+
+    <script>
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+
+            key.classList.add('playing');
+            audio.currentTime = 0;
+            audio.play();
+            // audioReset();
+
+        }
+
+        // function audioReset(e){
+        //     audio.currentTime = 0;
+        //     audio.play();
+        // }
+
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            e.target.classList.remove('playing');
+        }
+
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+        //playsound() is a listener which is registered using addEventListener
+        //window is global object in a browser
+        window.addEventListener('keydown', playSound);
+    </script>
+
+    <!-- TODO:
+    1) Make responsive
+    2) Make touch-compatible for phones -->
+
+</body>
+
+</html>
