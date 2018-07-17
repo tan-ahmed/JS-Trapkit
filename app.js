@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const keys = Array.from(document.querySelectorAll(".key"));
   keys.forEach(key => key.addEventListener("transitionend", removeTransition));
 
-  //playsound() is a listener which is registered using addEventListener
   //window is global object in a browser
-
   window.addEventListener("keydown", playSound);
   window.addEventListener("click", playSound);
 
